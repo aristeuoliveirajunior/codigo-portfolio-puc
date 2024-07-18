@@ -1,0 +1,44 @@
+<!-- <main>
+  <header>
+    <div class="close-area"></div>
+    <input placeholder="https://..." value="https://mariosouto.com" />
+  </header>
+  <iframe src="https://mariosouto.com"></iframe>
+</main>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=
+  , initial-scale=1.0"
+    />
+    <title>Mini Browser Experimental</title>
+  </head>
+  <body>
+    <script>
+      // [ENTRADA]
+      // ARRAYS: lista de coisas
+      var aba1 = { titulo: "titulo da aba 1", url: "http://www.google.com.br" };
+      var aba2 = { titulo: "titulo da aba 2", url: "http://www.bol.com.br" };
+
+      const abas = [aba1, aba2];
+
+      // [PROCESSAMENTO]
+
+      for (aba of abas) {
+        console.log(aba.titulo);
+        // [OUTPUT]
+        var valorAtualDoHTML = document.body.innerHTML;
+        document.body.innerHTML =
+          valorAtualDoHTML +
+          `<li><a href="${aba.url}">` +
+          `${aba.titulo}</a></li>`;
+      }
+    </script>
+    <!--<link rel="stylesheet" href="./style.css" />-->
+  </body>
+</html>
