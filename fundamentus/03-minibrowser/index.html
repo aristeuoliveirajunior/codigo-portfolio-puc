@@ -17,6 +17,9 @@
   , initial-scale=1.0"
     />
     <title>Mini Browser Experimental</title>
+
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <script type="text/javascript" src="browserHistory.js"></script>
   </head>
   <body>
     <script>
@@ -24,6 +27,7 @@
       // ARRAYS: lista de coisas
       var aba1 = { titulo: "titulo da aba 1", url: "http://www.google.com.br" };
       var aba2 = { titulo: "titulo da aba 2", url: "http://www.bol.com.br" };
+      var browserHistory = new BrowserHistory();
 
       const abas = [aba1, aba2];
 
@@ -38,7 +42,51 @@
           `<li><a href="${aba.url}">` +
           `${aba.titulo}</a></li>`;
       }
+
+      function navegate() {
+        const url = document.getElementById("txtUrl").value;
+        document.getElementById("content").innerHTML = url;
+
+        browserHistory.addPage(url);
+
+        document.getElementById("browserHistory").innerHTML =
+          browserHistory.print();
+      }
+
+      function back() {
+        const url = browserHistory.last();
+        document.getElementById("content").innerHTML = url;
+
+        document.getElementById("browserHistory").innerHTML =
+          browserHistory.print();
+      }
+
+      function next() {
+        const url = browserHistory.next();
+        document.getElementById("content").innerHTML = url;
+
+        const history = browserHistory.print();
+        document.getElementById("browserHistory").innerHTML = history;
+      }
     </script>
     <!--<link rel="stylesheet" href="./style.css" />-->
+
+    <!--inclusão da funcionalidade de histórico do navegador-->
+
+    <div class="browser">
+      <input type="text" id="txtUrl" placeholder="Digite a URL" />
+      <input type="button" value="Acessar" onClick="navegate()" />
+    </div>
+
+    <input type="button" value="Voltar" onClick="back()" />
+    <input type="button" value="Avançar" onClick="next()" />
+
+    <div class="browser"><span>janela do browser</span></div>
+    <div id="content">Nenhuma página acessada</div>
+
+    <div class="browser"><span>histórico de páginas</span></div>
+    <div id="browserHistory"></div>
+
+    <!--inclusão da funcionalidade de histórico do navegador-->
   </body>
 </html>

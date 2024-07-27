@@ -1,0 +1,15 @@
+#content {
+  border: 1px solid black;
+  height: 100px;
+  width: 300px;
+}
+
+#browserHistory {
+  border: 1px solid black;
+  height: 200px;
+  width: 200px;
+}
+
+.browser {
+  margin-top: 50px;
+}
