@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      async function calculaIdadeV1(anoNascimento) {
+        for (cont = 0; cont < 9; cont++) {}
+        if (anoNascimento > 0) {
+          return new Date().getFullYear() - anoNascimento;
+        } else
+          throw new Error(
+            "o ano de nascimento informado é menor ou igual a zero"
+          );
+      }
+
+      function calculaIdadeV2(anoNascimento) {
+        const result = new Promise((sucesso, erro) => {
+          for (cont = 0; cont < 9; cont++) {}
+          if (anoNascimento > 0) {
+            sucesso(new Date().getFullYear() - anoNascimento);
+          } else erro("o ano de nascimento informado é menor ou igual a zero");
+        });
+
+        return result;
+      }
+
+      var calcularSalarioV1 = async () => {
+        let salario = 0;
+
+        for (let cont = 0; cont <= 99; cont += 1) {
+          salario += 1;
+        }
+
+        return salario;
+      };
+
+      var calcularSalarioV2 = new Promise((resolve, reject) => {
+        let salario = 0;
+
+        for (let cont = 0; cont <= 9999999; cont++) {
+          salario += 1;
+        }
+
+        resolve(salario);
+      });
+
+      const calcularSalarioV3 = new Promise((resolve, reject) => {
+        let salario = 1;
+
+        for (let cont = 0; cont <= 9999999; cont++) {
+          salario += 2;
+        }
+
+        resolve(salario);
+      });
+
+      function calculaIdadeComSucesso(sucesso) {
+        console.log(
+          "Deu certo a idade calculada é " +
+            sucesso +
+            "<-não esperou concluir para prosseguir"
+        );
+      }
+
+      function calculaIdadeComErro(erro) {
+        console.log("Deu Erro motivo " + erro);
+      }
+
+      async function inicioPrograma() {
+        //console.log(calcularSalarioAssincrono(calcularSalario));
+
+        console.log("inicio do programa");
+
+        console.log("chamou calcularSalarioV1 com await");
+        const salario1 = await calcularSalarioV1();
+        console.log(
+          "salário 1: " + salario1 + "<-esperou concluir para prosseguir"
+        );
+
+        console.log("chamou calcularSalarioV2 com await");
+        const salario2 = await calcularSalarioV2;
+        console.log(
+          "salário 2: " + salario2 + "<-esperou concluir para prosseguir"
+        );
+
+        console.log("chamou calcularSalarioV3 sem await");
+        const salario3 = calcularSalarioV3;
+        console.log(
+          "salário 3: " + salario3 + "<-sem await retornou uma promise"
+        );
+
+        salario3.then(
+          (salario) =>
+            console.log(
+              "salário 3: " + salario + "<-não esperou concluir para prosseguir"
+            ),
+          (erro) => console.log("Salário erro: " + erro)
+        );
+
+        console.log("chamou calculaIdadeV1 sem await");
+        const promise = calculaIdadeV1(1986);
+
+        console.log("chamou calculaIdadeV2 sem await");
+        const promise2 = calculaIdadeV2(1985);
+        promise.then(calculaIdadeComSucesso, calculaIdadeComErro);
+        promise2.then(calculaIdadeComSucesso, calculaIdadeComErro);
+
+        console.log("chegou ao fim o programa");
+      }
+      inicioPrograma();
+    </script>
+  </body>
+</html>
